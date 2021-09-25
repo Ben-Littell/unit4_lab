@@ -8,10 +8,10 @@ GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
 SKY_BLUE = (51, 31, 153)
 BLACK = (0, 0, 0)
-COLORS = [RED, GREEN, BLUE, BLACK]
 LIGHT_GREEN = (25, 227, 79)
 GRASS = (33, 110, 2)
-WHITE_H = (254, 249, 238)
+HOUSE_C = (21, 42, 71)
+COLORS = [RED, GREEN, BLUE, LIGHT_GREEN]
 # Math Constants
 PI = math.pi
 
@@ -35,14 +35,38 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+
     # Background
     screen.fill(WHITE)
     pygame.draw.rect(screen, GRASS, GRASS_CORDS)
     pygame.draw.rect(screen, SKY_BLUE, SKY_CORDS)
-    # House
-    pygame.draw.rect(screen, WHITE_H, (50, 220, 100, 130))
-    pygame.draw.polygon(screen, WHITE_H, [[100, 170], [50, 220], [150, 220]])
-    pygame.draw.ellipse(screen, BLACK, (88, 180, 25, 25), 2)
+    # Houses
+    for numb in range(4):
+        change_h = numb * 150
+        # House
+        pygame.draw.rect(screen, HOUSE_C, (50 + change_h, 220, 100, 130))
+        pygame.draw.polygon(screen, HOUSE_C, [[100 + change_h, 170], [50 + change_h, 220], [150 + change_h, 220]])
+        # Windows
+        pygame.draw.ellipse(screen, BLACK, (88 + change_h, 184, 25, 25), 2)
+        pygame.draw.rect(screen, BLACK, (65 + change_h, 230, 25, 25))
+        pygame.draw.rect(screen, BLACK, (110 + change_h, 230, 25, 25))
+        pygame.draw.rect(screen, BLACK, (65 + change_h, 275, 25, 25))
+        pygame.draw.rect(screen, BLACK, (110 + change_h, 275, 25, 25))
+        # Door
+        pygame.draw.rect(screen, COLORS[numb], (88 + change_h, 310, 30, 40))
+    # Clouds
+    for numb in range(3):
+        change_cx = numb * 110
+        change_cy = numb * 20
+        pygame.draw.ellipse(screen, WHITE, (50 + change_cx, 30 + change_cy, 50, 30))
+        pygame.draw.ellipse(screen, WHITE, (60 + change_cx, 45 + change_cy, 50, 30))
+        pygame.draw.ellipse(screen, WHITE, (40 + change_cx, 35 + change_cy, 50, 30))
+        pygame.draw.ellipse(screen, WHITE, (75 + change_cx, 33 + change_cy, 50, 30))
+    pygame.draw.ellipse(screen, WHITE, (500, 30, 50, 30))
+    pygame.draw.ellipse(screen, WHITE, (510, 45, 50, 30))
+    pygame.draw.ellipse(screen, WHITE, (490, 35, 50, 30))
+    pygame.draw.ellipse(screen, WHITE, (525, 33, 50, 30))
+
     pygame.display.flip()
 
     clock.tick(FPS)
