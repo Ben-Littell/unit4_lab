@@ -16,7 +16,8 @@ COLORS = [RED, GREEN, BLUE, LIGHT_GREEN]
 PI = math.pi
 
 # Game Constants
-SIZE = (700, 500)
+WIDTH = 700
+SIZE = (WIDTH, 500)
 FPS = 60
 
 GRASS_CORDS = (0, 350, 700, 500)
@@ -29,12 +30,26 @@ screen = pygame.display.set_mode(SIZE)
 pygame.display.set_caption('First Scene')
 clock = pygame.time.Clock()
 
+cloud_x1 = 50
+cloud_x2 = 60
+cloud_x3 = 40
+cloud_x4 = 75
+
 running = True
 # game loop
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+    cloud_x1 += 3
+    cloud_x2 += 3
+    cloud_x3 += 3
+    cloud_x4 += 3
+    if cloud_x4 > WIDTH + 50:
+        cloud_x1 = -275      # 0
+        cloud_x2 = -265     # + 10
+        cloud_x3 = -285    # - 10
+        cloud_x4 = -250     # + 25
 
     # Background
     screen.fill(WHITE)
@@ -58,14 +73,10 @@ while running:
     for numb in range(3):
         change_cx = numb * 110
         change_cy = numb * 20
-        pygame.draw.ellipse(screen, WHITE, (50 + change_cx, 30 + change_cy, 50, 30))
-        pygame.draw.ellipse(screen, WHITE, (60 + change_cx, 45 + change_cy, 50, 30))
-        pygame.draw.ellipse(screen, WHITE, (40 + change_cx, 35 + change_cy, 50, 30))
-        pygame.draw.ellipse(screen, WHITE, (75 + change_cx, 33 + change_cy, 50, 30))
-    pygame.draw.ellipse(screen, WHITE, (500, 30, 50, 30))
-    pygame.draw.ellipse(screen, WHITE, (510, 45, 50, 30))
-    pygame.draw.ellipse(screen, WHITE, (490, 35, 50, 30))
-    pygame.draw.ellipse(screen, WHITE, (525, 33, 50, 30))
+        pygame.draw.ellipse(screen, WHITE, (cloud_x1 + change_cx, 30 + change_cy, 50, 30))
+        pygame.draw.ellipse(screen, WHITE, (cloud_x2 + change_cx, 45 + change_cy, 50, 30))
+        pygame.draw.ellipse(screen, WHITE, (cloud_x3 + change_cx, 35 + change_cy, 50, 30))
+        pygame.draw.ellipse(screen, WHITE, (cloud_x4 + change_cx, 33 + change_cy, 50, 30))
 
     pygame.display.flip()
 
